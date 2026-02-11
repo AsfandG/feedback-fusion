@@ -1,0 +1,61 @@
+// prisma/schema.prisma
+// Define your database models
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// Example models
+
+model User {
+  id          Int     @id @default(autoincrement())
+  clerkUserId String
+  email       String  @unique
+  name        String?
+  posts       Post[]
+  image       String
+  votes       Vote[]
+  role        Role @default(user)
+
+  @@map("users")
+}
+
+model Post {
+  id            Int     @id @default(autoincrement())
+  title         String
+  description   String?
+  category      String
+  status        PostStatus @default(under_review)
+  published     Boolean @default(false)
+  author        User    @relation(fields: [authorId], references: [id])
+  authorId      Int
+  votes         Vote[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@map("posts")
+}
+
+model Vote {
+  id       Int @id @default(autoincrement())
+  user     User @relation(fields: [userId], references: [id])
+  userId    Int
+  post      Post @relation(fields: [postId], references: [id])
+  postId    Int
+}
+
+enum Role {
+  user
+  admin
+}
+
+enum PostStatus {
+  under_review
+  planned
+  in_progress
+}
