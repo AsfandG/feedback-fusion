@@ -20,7 +20,7 @@ export default function HomePage() {
       >
         <div className="flex gap-4 justify-center pt-4">
           <Button asChild className="bg-white text-blue-600 hover:bg-gray-100">
-            <Link href="/feedback/new">
+            <Link href="/feedback">
               Submit Feedback <ArrowRight className="w-4 h-4 ml-2" />{" "}
             </Link>
           </Button>
@@ -31,7 +31,7 @@ export default function HomePage() {
           </Button>
         </div>
       </GradientHeader>
-
+      {/* How it works */}
       <section>
         <h2 className="text-3xl font-semibold text-center mb-8">
           How It Works
@@ -82,6 +82,24 @@ export default function HomePage() {
               </p>
             </CardContent>
           </Card>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="text-center">
+        <div className="inline-grid grid-cols-3 gap-8">
+          <div>
+            <div>1,234+</div>
+            <div className="text-muted-foreground">Suggestions</div>
+          </div>
+          <div>
+            <div>8,901+</div>
+            <div className="text-muted-foreground">Votes Cast</div>
+          </div>
+          <div>
+            <div>230+</div>
+            <div className="text-muted-foreground">Features Shipped</div>
+          </div>
         </div>
       </section>
     </div>
